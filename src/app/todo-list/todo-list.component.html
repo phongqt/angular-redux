@@ -1,0 +1,51 @@
+<h6>Create todo</h6>
+<form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" name="form" novalidate>
+  <div class="form-row">
+    <div class="col-auto">
+      <input type="text" class="form-control" [class.is-invalid]="f.submitted && description.invalid"
+      id="description" name="description" placeholder="Description" [(ngModel)]="model.description" #description="ngModel" required>
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" [class.is-invalid]="f.submitted && responsible.invalid"
+      id="responsible" name="responsible" placeholder="Responsible" [(ngModel)]="model.responsible" #responsible="ngModel" required>
+    </div>
+    <div class="col-auto">
+      <select name="priority" id="priority" class="form-control" [(ngModel)]="model.priority" #priority="ngModel">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit">Create</button>
+    </div>
+  </div>
+</form>
+<br>
+<h6>Todo list</h6>
+<div *ngIf="(todos | async)?.length != 0">
+  <table class="table">
+    <thead class="thead-inverse">
+      <th>#</th>
+      <th>Description</th>
+      <th>Responsible</th>
+      <th>Priority</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of todos | async">
+        <td><span (click)="toggleTodo(item)" [class.completed]="item.isComplete">{{item.id}}</span></td>
+        <td><span (click)="toggleTodo(item)" [class.completed]="item.isComplete">{{item.description}}</span></td>
+        <td><span (click)="toggleTodo(item)" [class.completed]="item.isComplete">{{item.responsible}}</span></td>
+        <td>
+          <span *ngIf="item.priority === 'low'" class="badge badge-success">Low</span>
+          <span *ngIf="item.priority === 'medium'" class="badge badge-warning">Medium</span>
+          <span *ngIf="item.priority === 'high'" class="badge badge-danger">High</span>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="removeTodo(item)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
