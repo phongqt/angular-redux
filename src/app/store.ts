@@ -1,5 +1,5 @@
 import { ITodo } from './todo';
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, REMOVE_ALL_TODO } from './actions';
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, REMOVE_ALL_TODO } from './actions/types';
 export interface IAppState {
   todos: ITodo[];
   lastUpdate: Date;

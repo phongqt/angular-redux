@@ -8,6 +8,7 @@ import { IAppState, INITIAL_STATE, rootReducer } from './store';
 import { AppComponent } from './app.component';
 import { TodoOverviewComponent } from './todo-overview/todo-overview.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoActions } from './actions/todo';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     FormsModule,
     NgReduxModule
   ],
-  providers: [],
+  providers: [TodoActions],
   bootstrap: [AppComponent]
 })
 export class AppModule {

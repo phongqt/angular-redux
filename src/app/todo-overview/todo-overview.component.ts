@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../store';
-import { REMOVE_ALL_TODO } from '../actions';
+import { REMOVE_ALL_TODO } from '../actions/types';
 
 @Component({
   selector: 'app-todo-overview',

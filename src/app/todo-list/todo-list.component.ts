@@ -3,8 +3,9 @@ import { NgRedux, select } from '@angular-redux/store';
 import { NgForm } from '@angular/forms';
 
 import { ITodo } from '../todo';
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, REMOVE_ALL_TODO } from '../actions';
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, REMOVE_ALL_TODO, LIST_TODO } from '../actions/types';
 import { IAppState } from '../store';
+import { TodoActions } from '../actions/todo';
 
 @Component({
   selector: 'app-todo-list',
@@ -20,14 +21,15 @@ export class TodoListComponent implements OnInit {
     priority: 'low',
     isComplete: false
   };
-  constructor(private ngRedux: NgRedux<IAppState>) { }
+  constructor(private ngRedux: NgRedux<IAppState>, private todoActions: TodoActions) { }
 
   ngOnInit() {
+    this.todoActions.list();
   }
 
   onSubmit(form: NgForm) {
     this.ngRedux.dispatch({ type: ADD_TODO, todo: this.model });
-    form.resetForm( this.model = {
+    form.resetForm(this.model = {
       id: 0,
       description: '',
       responsible: '',
